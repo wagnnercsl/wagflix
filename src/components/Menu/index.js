@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 import './styles.css';
 
-import ButtonLink from '../ButtonLink';
-import Button from '../Button';
-
 function Menu() {
     return (
         <nav className="Menu">
