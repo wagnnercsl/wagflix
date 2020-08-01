@@ -37,7 +37,10 @@ function CadastroCategoria() {
   }
 
   useEffect(() => {
-    const URL = 'http://localhost:8080/categorias';
+    // const URL = 'http://localhost:8080/categorias';
+    const URL = window.location.origin.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://wagflix.herokuapp.com/categorias';
     fetch(URL)
       .then(async (response) => {
         const data = await response.json();
