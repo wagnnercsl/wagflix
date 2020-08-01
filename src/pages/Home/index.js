@@ -7,40 +7,40 @@ import Footer from '../../components/Footer';
 
 function App() {
   return (
-    <div style={{background: "#141414"}}>
+    <div style={{ background: '#141414' }}>
       <Menu />
 
       <BannerMain
         videoTitle={dadosIniciais.categorias[6].videos[0].titulo}
         url={dadosIniciais.categorias[6].videos[0].url}
-        videoDescription={"As melhores lutas de Boku No Hero"}
+        videoDescription="As melhores lutas de Boku No Hero"
       />
 
-      <Carousel 
+      <Carousel
         category={dadosIniciais.categorias[0]}
       />
 
-      <Carousel 
+      <Carousel
         category={dadosIniciais.categorias[1]}
       />
 
-    <Carousel 
+      <Carousel
         category={dadosIniciais.categorias[2]}
       />
 
-    <Carousel 
+      <Carousel
         category={dadosIniciais.categorias[3]}
       />
 
-    <Carousel 
+      <Carousel
         category={dadosIniciais.categorias[4]}
       />
 
-      <Carousel 
+      <Carousel
         category={dadosIniciais.categorias[5]}
       />
 
-      <Carousel 
+      <Carousel
         category={dadosIniciais.categorias[6]}
       />
 
