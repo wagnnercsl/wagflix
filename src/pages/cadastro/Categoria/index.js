@@ -1,32 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '../../../components/Button';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
+import useForm from '../../../hooks/useForm';
+import categoriasRepository from '../../../repositories/categorias';
 
 function CadastroCategoria() {
-  const categoriaInicial = {
-    nome: '',
+  const valoresIniciais = {
+    titulo: '',
     descricao: '',
     cor: '#000',
   };
 
+  const { handleChange, values, clearForm } = useForm(valoresIniciais);
   const [categorias, setCategorias] = useState([]);
-  const [values, setValues] = useState(categoriaInicial);
-
-  function setValue(chave, valor) {
-    setValues({
-      ...values,
-      [chave]: valor,
-    });
-  }
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-
-    setValue(
-      name, value,
-    );
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -34,19 +22,15 @@ function CadastroCategoria() {
       ...categorias,
       values,
     ]);
+
+    clearForm();
   }
 
   useEffect(() => {
     // const URL = 'http://localhost:8080/categorias';
-    const URL = window.location.origin.includes('localhost')
-      ? 'http://localhost:8080/categorias'
-      : 'https://wagflix.herokuapp.com/categorias';
-    fetch(URL)
-      .then(async (response) => {
-        const data = await response.json();
-        setCategorias([
-          ...data,
-        ]);
+    categoriasRepository.getAllWithVideos()
+      .then((resposta) => {
+        setCategorias(resposta);
       });
   }, []);
 
@@ -54,15 +38,15 @@ function CadastroCategoria() {
     <PageDefault>
       <h1>
         Cadastro de Categoria:
-        {categoriaInicial.nome}
+        {valoresIniciais.title}
       </h1>
 
       <form onSubmit={handleSubmit}>
         <FormField
           label="Nome da Categoria"
-          name="nome"
+          name="titulo"
           type="text"
-          value={values.nome}
+          value={values.titulo}
           onChange={handleChange}
         />
 
@@ -82,7 +66,7 @@ function CadastroCategoria() {
           onChange={handleChange}
         />
 
-        <button type="submit"> Cadastrar </button>
+        <Button type="submit"> Cadastrar </Button>
       </form>
 
       {categorias.length === 0 && (
@@ -93,7 +77,7 @@ function CadastroCategoria() {
 
       <ul>
         {categorias.map((categoria, i) => (
-          <li key={`${categoria + i}`}>{categoria.nome}</li>
+          <li key={`${categoria + i}`}>{categoria.titulo}</li>
         ))}
       </ul>
 
